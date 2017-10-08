@@ -32,7 +32,6 @@ public class Dictionary() {
 	public List<String> getAllPositiveBuzzwords() {
 		return Arrays.asList("increas\\w*", "rising", "boom\\w*", "jump\\w*", "surg\\w*", "rose", "popped", "climb\\w*", "trend\\w*", "soar\\w*",
 			"\\w*rocket\\w*", "high", "marched", "catapulted", "rall\\w*", "revers\\w*", "better", "stabl\\w*", "roar\\w*", "leap\\w*");
-
 	}
 
 	public List<String> getAllNegativeBuzzwords() {

@@ -9,8 +9,8 @@ public class ArticleAnalyzer {
 
 	public ArrayList<Company> analyzeArticles(HashMap<String, String> articleTitlesAndUrls) {
 		Map<String, Company> companies = new HashMap<>();
-		for (Map.Entry pair : articleTitlesAndUrls.entrySet()) {
-			Company company = getAnalysis(pair);
+		//for (Map.Entry pair : articleTitlesAndUrls.entrySet()) {
+			Company company = getAnalysis(String name, String title, String url);
 			if (companies.containsKey(company.getName())) {
 				Company original = companies.get(company.getName());
 				company.addPositiveWords(original.getPositiveWords());
@@ -24,24 +24,24 @@ public class ArticleAnalyzer {
 		return companies.values();
 	}
 
-	public Company getAnalysis(Map.Entry pair) {
+	public Company getAnalysis(String name, String title, String url) {
 		ArrayList<String> positiveWords = new ArrayList<>();
 		ArrayList<String> negativeWords = new ArrayList<>();
-		Company company = new Company(getName(pair.getValue()));
-		//analyze based on pair.getKey()
-		for (String s : pair.getKey().split(" ")) {
-			
+		Company company = new Company(name);
+		for (String s : title.split(" ")) {
+			if (dictionary.containsPositive(s)) {
+				positiveWords.add(s.toLowerCase());
+			}
+			if (dictionary.containsNegative(s)) {
+				negativeWords.add(s.toLowerCase());
+			}
 		}
-
 		if (!positiveWords.isEmpty()) {
-			company.addPositiveArticle(pair.getValue());
+			company.addPositiveArticle(url);
 		}
 		if (!negativeWords.isEmpty()) {
-			company.addNegativeArticle(pair.getValue());
+			company.addNegativeArticle(url);
 		}
-	}
-
-	public String getName(String articleTitle) { //regex matching on TheFool.com using regex ".*(\([A-Z]+?:[A-Z]+?\)).*" and Matcher.group(1)
-		return "";
+		return company;
 	}
 }

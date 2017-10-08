@@ -44,6 +44,8 @@ router.get('/stockinformation', function(req, res, next) {
       })
     })
     .then(() => {
+      //CALL ANALYZE ARTICLES
+      
       res.json(articles);
     })
     .catch((error) => {
